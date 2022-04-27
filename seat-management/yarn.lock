@@ -4727,6 +4727,11 @@
   "resolved" "https://registry.npmjs.org/klona/-/klona-2.0.5.tgz"
   "version" "2.0.5"
 
+"konva@^8.3.5", "konva@>7":
+  "integrity" "sha512-RjaZN8PwZN3n/AlqLmtPNozLRXd6pPo11UawTJpvuOAKEkSQSXI1EHntDRIPnrrJ/j4gU0VmPzWs7/ZgLZnAPQ=="
+  "resolved" "https://registry.npmjs.org/konva/-/konva-8.3.5.tgz"
+  "version" "8.3.5"
+
 "launch-editor-middleware@^2.2.1":
   "integrity" "sha512-GJR64trLdFFwCoL9DMn/d1SZX0OzTDPixu4mcfWTShQ4tIqCHCGvlg9fOEYQXyBlrSMQwylsJfUWncheShfV2w=="
   "resolved" "https://registry.npmjs.org/launch-editor-middleware/-/launch-editor-middleware-2.3.0.tgz"
@@ -7303,6 +7308,11 @@
   "integrity" "sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog=="
   "resolved" "https://registry.npmjs.org/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz"
   "version" "2.3.4"
+
+"vue-konva@^3.0.0":
+  "integrity" "sha512-3psMFPEyT9f9GjQFLd8BuSA8/DDYeWUHiV7Rd4iZMIIbNsI7esF0E27H9918Ukfz7XygRbV0SLIDS/ebTMJD0g=="
+  "resolved" "https://registry.npmjs.org/vue-konva/-/vue-konva-3.0.0.tgz"
+  "version" "3.0.0"
 
 "vue-loader@^17.0.0":
   "integrity" "sha512-OWSXjrzIvbF2LtOUmxT3HYgwwubbfFelN8PAP9R9dwpIkj48TVioHhWWSx7W7fk+iF5cgg3CBJRxwTdtLU4Ecg=="
