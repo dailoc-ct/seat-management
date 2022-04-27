@@ -7,13 +7,13 @@ module.exports = {
       // AND `<style lang="scss">` blocks in `.vue` files
       {
         test: /\.scss$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
-      }
-    ]
+        use: ["vue-style-loader", "css-loader", "sass-loader"],
+      },
+      // {
+      //   test: /\.svg$/,
+      //   loader: "vue-svg-loader", // `vue-svg` if using webpack 1.x
+      // },
+    ],
   },
   // plugin omitted
-}
+};

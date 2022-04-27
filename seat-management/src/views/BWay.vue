@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <upload-file @upload-file="upload"></upload-file>
     <div class="background">
       <template v-if="checkSeats">
         <button
@@ -16,44 +17,53 @@
 </template>
 
 <script>
+import { Options, Vue } from "vue-class-component";
+import UploadFile from "@/components/UploadFile.vue";
 import { result } from "../test-convert/convert-svg.ts";
-export default {
+
+@Options({
+  components: {
+    "upload-file": UploadFile,
+  },
+})
+export default class BWay extends Vue {
   data() {
     return {
       seats: [],
       leftValue: "0px",
       topValue: "0px",
     };
-  },
+  }
   async mounted() {
     await this.checkConvert();
-  },
-  computed: {
-    checkSeats() {
-      return this.seats && this.seats.length > 0;
-    },
-  },
-  methods: {
-    async checkConvert() {
-      const seatMap = result.svg[0].g[0].rect;
-      await this.findSeat(seatMap);
-    },
-    async findSeat(seatMap) {
-      const scaleX = 1642 / 1205;
-      const scaleY = 1032 / 762;
-      seatMap.map((seat) => {
-        const object = seat._attributes;
-        if (object.height === 80 && object.width === 80) {
-          const positionValue = {
-            x: object.x / scaleX + 10 + "px",
-            y: object.y / scaleY + 78.4 + 8 + "px",
-          };
-          this.seats.push(positionValue);
-        }
-      });
-    },
-  },
-};
+  }
+
+  get checkSeats() {
+    return this.seats && this.seats.length > 0;
+  }
+
+  async upload(file) {
+    console.log(file);
+  }
+  async checkConvert() {
+    const seatMap = result.svg[0].g[0].rect;
+    await this.findSeat(seatMap);
+  }
+  async findSeat(seatMap) {
+    const scaleX = 1642 / 1205;
+    const scaleY = 1032 / 762;
+    seatMap.map((seat) => {
+      const object = seat._attributes;
+      if (object.height === 80 && object.width === 80) {
+        const positionValue = {
+          x: object.x / scaleX + 10 + "px",
+          y: object.y / scaleY + 78.4 + 8 + "px",
+        };
+        this.seats.push(positionValue);
+      }
+    });
+  }
+}
 </script>
 <style scoped lang="css">
 .container {
