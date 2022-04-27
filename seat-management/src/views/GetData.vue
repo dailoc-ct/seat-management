@@ -31,13 +31,7 @@ export default {
           seats.push({ ...seat, y: seat.y + 286.4 });
         });
     });
-    const showMap = computed(() => {
-      if (seatsMap.seats) {
-        return seats.length === seatsMap.seats?.length;
-      }
-      return false;
-    });
-    return { seats, showMap };
+    return { seats };
   },
 };
 </script>

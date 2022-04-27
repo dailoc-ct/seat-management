@@ -12,8 +12,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, onUpdated } from "vue";
-import { Seat } from "../../public/interface/seatMap.state";
+import { computed } from "vue";
 export default {
   name: "SeatMap",
   props: ["seatMap"],
