@@ -43,7 +43,7 @@ export default class BWay extends Vue {
   }
 
   async upload(file) {
-    console.log(file);
+    console.log("check file", file);
   }
   async checkConvert() {
     const seatMap = result.svg[0].g[0].rect;
@@ -57,7 +57,7 @@ export default class BWay extends Vue {
       if (object.height === 80 && object.width === 80) {
         const positionValue = {
           x: object.x / scaleX + 10 + "px",
-          y: object.y / scaleY + 78.4 + 8 + "px",
+          y: object.y / scaleY + 78.4 + 8 + 45 + "px",
         };
         this.seats.push(positionValue);
       }

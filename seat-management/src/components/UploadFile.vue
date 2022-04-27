@@ -1,11 +1,12 @@
-/* eslint-disable */ // eslint-disable-next-line
+/* eslint-disable */
 <template>
   <div>
     <label>File </label>
     <input
-      ref="file"
+      ref="files"
+      id="files"
       type="file"
-      @change="onFileChanged($event)"
+      @change="onFileChanged()"
       accept="image/*"
     />
     <br />
@@ -16,16 +17,14 @@
 <script lang="ts">
 import { Vue } from "vue-class-component";
 export default class UploadFile extends Vue {
-  name: "UploadFile";
-
-  fileUpload: "";
-  //   onFileChanged() {
-  //     this.fileUpload = this.$refs.file.files[0];
-  //   }
+  private fileUpload: string | unknown = "";
   submitFile() {
     let formData = new FormData();
-    formData.append("file", this.fileUpload);
+    formData.append("file", this.fileUpload as string);
     this.$emit("upload-file", formData);
+  }
+  onFileChanged() {
+    this.fileUpload = this.$refs.files;
   }
 }
 </script>
