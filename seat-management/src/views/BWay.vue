@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <upload-file @upload-file="upload"></upload-file>
-    <div class="background">
+    <div v-if="showMap" class="background">
       <template v-if="checkSeats">
         <button
           v-for="seat in seats"
@@ -32,6 +32,7 @@ export default class BWay extends Vue {
       seats: [],
       leftValue: "0px",
       topValue: "0px",
+      showMap: false,
     };
   }
   async mounted() {
@@ -44,6 +45,7 @@ export default class BWay extends Vue {
 
   async upload(file) {
     console.log("check file", file);
+    this.showMap = true;
   }
   async checkConvert() {
     const seatMap = result.svg[0].g[0].rect;

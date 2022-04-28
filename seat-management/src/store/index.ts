@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { SeatMap } from "../../public/interface/seatMap.state";
+import { result } from "@/test-convert/convert-svg";
 
 export const seatMap = defineStore({
   // arrow function recommended for full type inference
@@ -18,6 +19,18 @@ export const seatMap = defineStore({
       this.seats = dataSeatMapReturn.seats;
       this.floor = dataSeatMapReturn.floor;
     },
+    uploadFile(file: any) {
+      console.log(file.get("image").name);
+
+      switch (file.get("image").name) {
+        case "floor.svg":
+          console.log(translateFloorSVGToObject().filter((ele: any) => ele));
+
+          this.seats = translateFloorSVGToObject().filter((ele: any) => ele);
+      }
+
+      this.floor = dataSeatMapReturn.floor;
+    },
   },
 });
 
@@ -25,27 +38,45 @@ export const seatMap = defineStore({
 const dataSeatMapReturn = {
   floor: 8,
   seats: [
-    { line: 1, seatNumber: "1", x: 50, y: 50 },
-    { line: 1, seatNumber: "2", x: 50, y: 100 },
-    { line: 1, seatNumber: "3", x: 100, y: 50 },
-    { line: 1, seatNumber: "4", x: 100, y: 100 },
-    { line: 1, seatNumber: "5", x: 50, y: 150 },
-    { line: 1, seatNumber: "6", x: 100, y: 150 },
-    { line: 2, seatNumber: "7", x: 50, y: 200 },
-    { line: 2, seatNumber: "8", x: 100, y: 200 },
-    { line: 3, seatNumber: "9", x: 50, y: 250 },
-    { line: 4, seatNumber: "10", x: 100, y: 250 },
-    { line: 4, seatNumber: "11", x: 300, y: 100 },
-    { line: 4, seatNumber: "12", x: 300, y: 50 },
-    { line: 4, seatNumber: "13", x: 350, y: 50 },
-    { line: 4, seatNumber: "14", x: 350, y: 100 },
-    { line: 3, seatNumber: "15", x: 350, y: 250 },
-    { line: 4, seatNumber: "16", x: 300, y: 250 },
-    { line: 4, seatNumber: "17", x: 300, y: 150 },
-    { line: 4, seatNumber: "18", x: 350, y: 150 },
-    { line: 4, seatNumber: "19", x: 300, y: 200 },
-    { line: 4, seatNumber: "20", x: 350, y: 200 },
-    { line: 4, seatNumber: "21", x: 50, y: 500 },
-    { line: 4, seatNumber: "22", x: 50, y: 550 },
+    { line: 1, seatNumber: "tdloc", x: 17, y: 125, on: true },
+    { line: 1, seatNumber: "nqtrieu", x: 77, y: 125, on: true },
+    { line: 1, seatNumber: "ppsang", x: 137, y: 125, on: true },
+    { line: 1, seatNumber: "ttkhanh", x: 197, y: 125, on: true },
+    { line: 1, seatNumber: "tqcuong", x: 257, y: 125, on: true },
+    { line: 1, seatNumber: "vtan", x: 317, y: 125, on: true },
+    { line: 2, seatNumber: "nttoan", x: 17, y: 170, on: true },
+    { line: 2, seatNumber: "tqhuy", x: 77, y: 170, on: true },
+    { line: 3, seatNumber: "tthuy", x: 137, y: 170, on: true },
+    { line: 4, seatNumber: "lnhuy", x: 197, y: 170, on: true },
+    { line: 4, seatNumber: "hqhai", x: 257, y: 170, on: true },
+    { line: 4, seatNumber: "nhtngan", x: 317, y: 170, on: true },
+    { line: 4, seatNumber: "nqdao", x: 510, y: 125, on: true },
+    { line: 4, seatNumber: "pdtien", x: 570, y: 125, on: true },
+    { line: 3, seatNumber: "vttoan", x: 630, y: 125, on: true },
+    { line: 4, seatNumber: "htnhoa", x: 690, y: 125, on: true },
+    { line: 4, seatNumber: "thvang", x: 510, y: 170, on: true },
+    { line: 4, seatNumber: "ttphuoc", x: 570, y: 170, on: true },
+    { line: 4, seatNumber: "hhphuc", x: 630, y: 170, on: true },
+    { line: 4, seatNumber: "hhau", x: 690, y: 170, on: true },
+    { line: 4, seatNumber: "xxx", x: 17, y: 275 },
+    { line: 4, seatNumber: "yyy", x: 17, y: 320 },
   ],
+};
+
+const translateFloorSVGToObject = () => {
+  const seats = result.svg[0].g[0].rect;
+  let countNumber = 0;
+  return seats.map((seat: any) => {
+    const object = seat._attributes;
+    if (object.height === 80 && object.width === 80) {
+      ++countNumber;
+      return {
+        x: object.x,
+        y: object.y,
+        line: countNumber % 3,
+        seatNumber: countNumber % 4 !== 0 ? countNumber + "" : "",
+        on: countNumber % 4 !== 0,
+      };
+    }
+  });
 };

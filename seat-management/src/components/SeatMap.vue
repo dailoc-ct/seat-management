@@ -1,18 +1,20 @@
 <template>
   <div class="container">
-    <button
-      class="seat"
+    <my-button
       v-for="seat in seats"
+      class="seat in-active p-button-raised p-button-outlined"
+      :class="{ active: seat.on }"
       :key="seat"
       :style="{ left: `${seat.x}px`, top: `${seat.y}px` }"
-    >
-      {{ seat.seatNumber }}
-    </button>
+      :label="seat.seatNumber"
+    />
+    <my-button label="Secondary" class="p-button-secondary" />
   </div>
 </template>
 
 <script lang="ts">
 import { computed } from "vue";
+// import Button from "primevue/button";
 export default {
   name: "SeatMap",
   props: ["seatMap"],
@@ -29,13 +31,21 @@ export default {
 <style scoped>
 .container {
   border: solid 2px #000;
-  height: 100vh;
   display: absolute;
+  background-image: url("../svg/floor.svg");
+  background-size: 100vh;
+  height: 1205px;
+  width: 762px;
 }
 .seat {
-  min-width: 50px;
-  min-height: 50px;
-  background: red;
+  min-width: 60px;
+  min-height: 40px;
   position: absolute;
+}
+.active {
+  background-color: aquamarine;
+}
+.un-active {
+  background-color: azure;
 }
 </style>

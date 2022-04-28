@@ -2,13 +2,7 @@
 <template>
   <div>
     <label>File </label>
-    <input
-      ref="files"
-      id="files"
-      type="file"
-      @change="onFileChanged()"
-      accept="image/*"
-    />
+    <input ref="files" id="files" type="file" @change="onFileChanged" />
     <br />
     <button @click="submitFile()">OK</button>
   </div>
@@ -17,14 +11,14 @@
 <script lang="ts">
 import { Vue } from "vue-class-component";
 export default class UploadFile extends Vue {
-  private fileUpload: string | unknown = "";
+  private fileUpload: any = null;
   submitFile() {
-    let formData = new FormData();
-    formData.append("file", this.fileUpload as string);
+    const formData = new FormData();
+    formData.append("image", this.fileUpload, this.fileUpload.name || "unkown");
     this.$emit("upload-file", formData);
   }
-  onFileChanged() {
-    this.fileUpload = this.$refs.files;
+  onFileChanged(event: any) {
+    this.fileUpload = event.target.files[0];
   }
 }
 </script>

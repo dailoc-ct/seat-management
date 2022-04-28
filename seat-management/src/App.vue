@@ -1,7 +1,8 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/b-way">BWay</router-link>
+    <router-link to="/b-way">Render In FE</router-link> |
+    <router-link to="/">Render with data from DB return</router-link> |
+    <router-link to="/c-way">Prototype</router-link>
   </nav>
   <router-view />
 </template>
