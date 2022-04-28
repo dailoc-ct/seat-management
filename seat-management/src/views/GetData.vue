@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <SeatMap :v-if="showMap" :seat-map="seats" />
+    <SeatMap :seat-map="seats" />
   </div>
 </template>
 

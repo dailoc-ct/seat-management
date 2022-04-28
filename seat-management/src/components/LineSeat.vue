@@ -1,36 +1,33 @@
 <template>
-  <div class="workspace">
-    <my-button
-      v-for="seat in seatMap"
-      class="seat in-active p-button-raised p-button-outlined"
-      :class="{ active: seat.on }"
-      :key="seat"
-      :style="{ left: `${seat.x}px`, top: `${seat.y}px` }"
-      :label="seat.seatNumber"
-    />
-  </div>
+  <div></div>
 </template>
+
 <script lang="ts">
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
+// import { seatMap } from "../store/index";
+
 export default {
-  name: "LineMap",
-  props: ["seats"],
+  name: "LineSeat",
+  props: ["seatMap"],
   setup(props: any) {
-    const seatMap = computed(() => {
-      return props.seats;
+    // const seatsMap = seatMap();
+    // const seats: any = seatsMap.seats;
+    // watch(seats, () => {
+    //   console.log("check watch");
+
+    //   return seats;
+    // });
+    // const a = computed(() => {
+    //   return seats;
+    // });
+    // return { seats, a };
+    const seats = ref(props.seatMap);
+    const seatMapper = computed(() => {
+      console.log("check");
+
+      return seats;
     });
-    return { seatMap };
+    return { seatMapper, seats };
   },
 };
 </script>
-
-<style scoped>
-.seat {
-  position: absolute;
-  min-width: 80px;
-  min-height: 80px;
-}
-.active {
-  background-color: aquamarine;
-}
-</style>

@@ -1,40 +1,63 @@
 <template>
   <div class="home">
     <upload-file @upload-file="upload"></upload-file>
-    <LineSeat :seats="seats" />
+    <my-button
+      v-for="seat in seats"
+      class="seat in-active p-button-raised p-button-outlined"
+      :class="{ active: seat.on }"
+      :key="seat"
+      :style="{ left: `${seat.x}px`, top: `${seat.y}px` }"
+      :label="seat.seatNumber"
+      @click="openModal(seat)"
+    />
+    <ModalInfo :v-if="isShow" :seat-info="seatInfo" @close="close" />
   </div>
 </template>
 
 <script lang="ts">
-import LineSeat from "@/components/LineSeat.vue"; // @ is an alias to /src
+import ModalInfo from "@/components/ModalInfo.vue";
 import { seatMap } from "../store/index";
-import { Seat } from "../../public/interface/seatMap.state";
 import UploadFile from "@/components/UploadFile.vue";
-import { computed, onBeforeMount } from "@vue/runtime-core";
+import { ref } from "@vue/reactivity";
+import { computed } from "@vue/runtime-core";
+import { Seat } from "../../public/interface/seatMap.state";
 
 export default {
   components: {
-    LineSeat,
+    ModalInfo,
     "upload-file": UploadFile,
   },
   setup() {
     const seatsMap = seatMap();
-    let seats: Seat[] = [];
-    // onBeforeMount(() => {
-    //   seatsMap.fetch();
-    // if (seatsMap.seats) {
-    //   seatsLine = seatsMap.seats.filter((seat) => seat.line);
-    //     console.log(seatsLine);
-    //   }
-    // });
+    const shap = ref();
+    let seatInfo: Seat | any = null;
+    let isShow = false;
     const upload = (file: any) => {
-      seatsMap.uploadFile(file);
-      if (seatsMap.seats)
-        seatsMap.seats.map(async (seat) => {
-          seats.push({ ...seat, y: seat.y });
-        });
+      shap.value = seatsMap.uploadFile(file);
     };
-    return { seats, upload };
+    const seats = computed(() => {
+      return shap.value;
+    });
+    const openModal = (seat: any) => {
+      console.log("show");
+
+      isShow = true;
+      seatInfo = seat;
+    };
+    const close = () => {
+      isShow = false;
+    };
+    return { upload, seats, openModal, isShow, seatInfo };
   },
 };
 </script>
+<style scoped>
+.seat {
+  position: absolute;
+  min-width: 80px;
+  min-height: 80px;
+}
+.active {
+  background-color: aquamarine;
+}
+</style>

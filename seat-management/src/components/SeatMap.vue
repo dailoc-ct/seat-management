@@ -8,13 +8,11 @@
       :style="{ left: `${seat.x}px`, top: `${seat.y}px` }"
       :label="seat.seatNumber"
     />
-    <my-button label="Secondary" class="p-button-secondary" />
   </div>
 </template>
 
 <script lang="ts">
 import { computed } from "vue";
-// import Button from "primevue/button";
 export default {
   name: "SeatMap",
   props: ["seatMap"],

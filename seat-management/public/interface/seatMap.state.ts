@@ -8,4 +8,5 @@ export interface Seat {
   y: number;
   seatNumber: string;
   line: number;
+  on?: boolean;
 }

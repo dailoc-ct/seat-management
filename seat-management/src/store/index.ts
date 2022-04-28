@@ -20,16 +20,12 @@ export const seatMap = defineStore({
       this.floor = dataSeatMapReturn.floor;
     },
     uploadFile(file: any) {
-      console.log(file.get("image").name);
-
+      this.floor = dataSeatMapReturn.floor;
       switch (file.get("image").name) {
         case "floor.svg":
-          console.log(translateFloorSVGToObject().filter((ele: any) => ele));
-
           this.seats = translateFloorSVGToObject().filter((ele: any) => ele);
+          return this.seats;
       }
-
-      this.floor = dataSeatMapReturn.floor;
     },
   },
 });
